@@ -1,0 +1,3 @@
+CREATE TABLE IF NOT EXISTS nodes(
+    id  bigint PRIMARY KEY
+);
