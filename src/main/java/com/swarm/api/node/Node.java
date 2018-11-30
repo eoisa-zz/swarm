@@ -9,7 +9,7 @@ import java.util.Optional;
 @Data
 @Entity
 @Table(name = "nodes")
-class Node {
+public class Node {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     Long id;
