@@ -1,3 +1,4 @@
 CREATE TABLE IF NOT EXISTS nodes(
-    id  bigint PRIMARY KEY
+    id  bigint PRIMARY KEY,
+    name varchar(50)
 );
