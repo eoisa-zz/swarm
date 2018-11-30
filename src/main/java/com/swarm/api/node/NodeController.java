@@ -3,22 +3,21 @@ package com.swarm.api.node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/add")
+import java.util.Map;
+
+@RestController @RequestMapping("/node")
 public class NodeController {
-
     @Autowired
-    private NodeRepository nodeRepository;
+    private NodeRepository nodeRepo;
 
-    @PostMapping("node")
-    public NodeViewModel add(@RequestParam(required = false) String name) {
-        Node node = nodeRepository.save(new Node(name));
-        return new NodeViewModel(node.getId(), node.getName().orElse(null));
+    @PostMapping
+    public Node createNode(@RequestBody Map<String, String> payload) {
+        return nodeRepo.save(new Node(payload));
     }
 
-    @DeleteMapping("node")
-    public void remove(@RequestParam Node node) {
-        nodeRepository.deleteById(node.getId());
+    @DeleteMapping
+    public void deleteNode(@RequestBody Node node) {
+        nodeRepo.deleteById(node.id);
     }
 
 }

@@ -1,31 +1,26 @@
 package com.swarm.api.node;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.util.Map;
 import java.util.Optional;
 
+@Data
 @Entity
 @Table(name = "nodes")
 class Node {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
+    Long id;
 
     @Column
     private String name;
 
-    Node(String name) {
-        this.name = name;
-    }
+    private Long hive;
 
-    Long getId() {
-        return id;
-    }
-
-    public Optional<String> getName() {
-        return Optional.ofNullable(name);
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    Node(Map<String, String> payload) {
+        this.name = payload.getOrDefault("name", null);
+        this.hive = Long.parseLong(payload.get("hive"));
     }
 }
