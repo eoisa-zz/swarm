@@ -7,16 +7,15 @@ was previously setup and a new migration has been added, you'll need to run the 
 schema and allow hibernate to rehydrate the database. _This will delete all the data in
 the database._ 
 
-### General order of development
+## General order of development
 
-Swarm API:
-* add - adds a node to the swarm
-* remove - removes a node from the swarm
-* report (per node)
-    * status
-        * Health - how much life does a node have available
-        * Location - last known gps coordinate of node
-        
-Node
-* current bearing
-* current life
+### Swarm API
+swagger documentation can be found at:
+* http://{server}:{port}/api/v0/swarm/swagger-ui.html
+
+#### Hives
+Each hive has its own swarm, a swarm is a collection of nodes.
+
+#### Node
+Each node is a single swarm unit that should be able to report it's health,
+ultimate location, and current bearing. 
