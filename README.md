@@ -7,6 +7,9 @@ was previously setup and a new migration has been added, you'll need to run the 
 schema and allow hibernate to rehydrate the database. _This will delete all the data in
 the database._ 
 
+** The app will now work as long as the accompanying hive application is not assigning destinations
+to each node **
+
 ## General order of development
 
 ### Swarm API

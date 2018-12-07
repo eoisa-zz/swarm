@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
-@RestController @RequestMapping("/hives")
+@RestController
+@RequestMapping("/hives")
 public class HiveController {
     @Autowired
     private HiveRepository hiveRepo;
@@ -17,12 +17,18 @@ public class HiveController {
     NodeRepository nodeRepo;
 
     @PostMapping
-    public Hive createHive(@RequestBody Map<String, String> body){
-        return hiveRepo.save(new Hive(body.get("name")));
+    public Hive createHive(@RequestBody ProtoHive body) {
+        return hiveRepo.save(new Hive(body.name));
     }
 
-    @GetMapping("/hive/{id}/nodes")
-    public List<Node> getNodesByHive(@PathVariable(value = "id") Long id){
-        return nodeRepo.findByHive(id);
+    @GetMapping("/hive/{hiveId}/nodes")
+    public List<Node> getNodesByHive(@PathVariable(value = "hiveId") Long hiveId) {
+        return nodeRepo.findByHive(hiveId);
+    }
+
+    @PutMapping("/hive/{hiveId}/nodes/node/{nodeId}")
+    public List<Node> removeNodeFromHive(@PathVariable(value = "hiveId") Long hiveId, @PathVariable(value = "nodeId") long nodeId) {
+        nodeRepo.updateNodeHiveDesignation(nodeId, 0);
+        return nodeRepo.findByHive(hiveId);
     }
 }
